@@ -10,7 +10,7 @@ resource "aws_cloudfront_origin_access_control" "oac" {
 resource "aws_cloudfront_distribution" "dist" {
   enabled             = true
   default_root_object = "index.html"
-  # aliases = ["viewcounters.dntgrowth.xyz"]
+  aliases             = ["viewcounters.dntgrowth.xyz"]
 
 
   origin {
@@ -42,12 +42,9 @@ resource "aws_cloudfront_distribution" "dist" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    #Certificate created manuallu in AWS ACM according README:
+    acm_certificate_arn      = "arn:aws:acm:us-east-1:686255985622:certificate/6927b3c0-341d-40d0-90b7-2317deaecb3e"
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
-  # viewer_certificate {
-  # Certificate created manuallu in AWS ACM according README:
-  # acm_certificate_arn      = "arn:aws:acm:us-east-1:686255985622:certificate/6927b3c0-341d-40d0-90b7-2317deaecb3e"
-  # ssl_support_method       = "sni-only"
-  # minimum_protocol_version = "TLSv1.2_2021"
-  # }
 }
