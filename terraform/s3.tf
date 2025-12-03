@@ -89,33 +89,33 @@ resource "aws_s3_object" "prefix_uploads" {
 resource "aws_s3_object" "index_html" {
   bucket = aws_s3_bucket.my_files.id
   key    = "index.html"
-  source = "build/index.html"
+  source = "s3_static_files/index.html"
 
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
   # etag = "${md5(file("path/to/file"))}"
-  etag         = filemd5("build/index.html")
+  etag         = filemd5("s3_static_files/index.html")
   content_type = "text/html"
 }
 resource "aws_s3_object" "style_css" {
   bucket = aws_s3_bucket.my_files.id
   key    = "style.css"
-  source = "build/style.css"
+  source = "s3_static_files/style.css"
 
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
   # etag = "${md5(file("path/to/file"))}"
-  etag         = filemd5("build/style.css")
+  etag         = filemd5("s3_static_files/style.css")
   content_type = "text/css"
 }
 resource "aws_s3_object" "error_html" {
   bucket = aws_s3_bucket.my_files.id
   key    = "error.html"
-  source = "build/error.html"
+  source = "s3_static_files/error.html"
 
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
   # etag = "${md5(file("path/to/file"))}"
-  etag         = filemd5("build/error.html")
+  etag         = filemd5("s3_static_files/error.html")
   content_type = "text/html"
 }

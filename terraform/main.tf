@@ -12,7 +12,15 @@ terraform {
   }
 }
 
-# Configure the AWS Provider
+# Configure the AWS Provider using the "default" profile located in my ~/.aws/credentials, and adding Tags:
 provider "aws" {
-  region = "eu-central-1"
+  profile = "default"
+  region  = "eu-central-1"
+
+  default_tags {
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
 }
+
