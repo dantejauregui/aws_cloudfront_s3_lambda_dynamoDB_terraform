@@ -29,33 +29,15 @@ deactivate
 
 
 
-# Terraform Part:
-Inside the `Terraform folder`, you can run the AWS Infrastructure using:
-```
-terraform init
-terraform plan
-terraform apply
-```
-
-And to destroy:
-```
-terraform destroy
-```
-
-
-
-# AWS Lambda notes:
-We are keeping different lambda scripts, but the one the is main used in AWS Lambda will be `index.py`
-
-
-
-# S3 important notes!:
+# S3 important notes before "terraform apply"!:
 ## Accesing S3 static website hosting isolated in Folders
 Due to we are using AWS Cloudfront in front of S3 static files, then *the S3 bucket has to remain Private* so Cloudfront can be the only one to access it through OAC. Meaning we will use a Cloudfront Distribution URL in the browser to access the index.html file, and not the traditional S3 hosting URL.
 
 
 
-# AWS Cloudfront & AWS Route53 important notes!:
+# AWS Cloudfront & AWS Route53 - important notes before "terraform apply"!:
+We are following these steps:  https://www.youtube.com/watch?v=KfpJlp7BqfI&list=PLjl2dJMjkDjnwCR6eTLBhjt_45Ua7N9vn&index=5
+
 As suggestion, create Hosted Zone and paste the NS records to your Registar before runnning `terraform apply`, which means the below steps should be done in "preparation stage" before the "terraform stage" starts:
 
 ## Create a public hosted zone in Route53 (Manually for now):
@@ -123,13 +105,29 @@ Possible with Terraform:
 
 
 
-<!-- # AWS Glue:
-Using terraform we had to add a Crawler, Catalog and the Glue Job, in order we can have a functional ETL pipeline. -->
+# AWS Lambda notes:
+We are keeping different lambda scripts, but the one the is main used in AWS Lambda will be `index.py`
+
+
+
+
+# Terraform Part:
+Inside the `Terraform folder`, you can run the AWS Infrastructure using:
+```
+terraform init
+terraform plan
+terraform apply
+```
+
+And to destroy:
+```
+terraform destroy
+```
+
 
 
 
 # Avoiding conflict with Pulumi resources/state:
-
 - In Terraform we will detail `Profile` and `Tags` inside the Provider in this way to avoid conflicts:
 ```
 provider "aws" {

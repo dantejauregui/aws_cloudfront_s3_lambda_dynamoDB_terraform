@@ -10,7 +10,7 @@ resource "aws_cloudfront_origin_access_control" "oac" {
 resource "aws_cloudfront_distribution" "dist" {
   enabled             = true
   default_root_object = "index.html"
-  aliases             = ["viewcounters.dntgrowth.xyz"]
+  aliases             = ["viewcounterz.dntgrowth.xyz"]
 
 
   origin {
