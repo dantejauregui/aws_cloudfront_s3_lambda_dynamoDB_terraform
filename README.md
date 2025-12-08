@@ -34,6 +34,10 @@ deactivate
 Due to we are using AWS Cloudfront in front of S3 static files, then *the S3 bucket has to remain Private* so Cloudfront can be the only one to access it through OAC. Meaning we will use a Cloudfront Distribution URL in the browser to access the index.html file, and not the traditional S3 hosting URL.
 
 
+## JS Script as static file need to Update latest Lambda URL
+In order to work the visit counter, you need to go to script.js and update for the current "Lambda URL", with that can call JS the python lambda function and dynamoDB get affected
+
+
 
 # AWS Cloudfront & AWS Route53 - important notes before "terraform apply"!:
 We are following these steps:  https://www.youtube.com/watch?v=KfpJlp7BqfI&list=PLjl2dJMjkDjnwCR6eTLBhjt_45Ua7N9vn&index=5
@@ -205,3 +209,11 @@ const bucket = new aws.s3.Bucket("plm-my-bucket-1234567890-pulumi-demo-dantej", 
 // Export the name of the bucket
 export const bucketName = bucket.id;
 ```
+
+
+
+
+# Next challenges:
+- Now that the UI visits counter is finished and stored in dynamoDB, create a form in a website storing the personal data in dynamoDB following this tutorial:
+
+https://www.youtube.com/watch?v=__o-9F9NBjg&list=PLjl2dJMjkDjlSARq_6kppW3nvUVIfy0Ut&index=7

@@ -98,24 +98,23 @@ resource "aws_s3_object" "index_html" {
   content_type = "text/html"
 }
 resource "aws_s3_object" "style_css" {
-  bucket = aws_s3_bucket.my_files.id
-  key    = "style.css"
-  source = "s3_static_files/style.css"
-
-  # The filemd5() function is available in Terraform 0.11.12 and later
-  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-  # etag = "${md5(file("path/to/file"))}"
+  bucket       = aws_s3_bucket.my_files.id
+  key          = "style.css"
+  source       = "s3_static_files/style.css"
   etag         = filemd5("s3_static_files/style.css")
   content_type = "text/css"
 }
 resource "aws_s3_object" "error_html" {
-  bucket = aws_s3_bucket.my_files.id
-  key    = "error.html"
-  source = "s3_static_files/error.html"
-
-  # The filemd5() function is available in Terraform 0.11.12 and later
-  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-  # etag = "${md5(file("path/to/file"))}"
+  bucket       = aws_s3_bucket.my_files.id
+  key          = "error.html"
+  source       = "s3_static_files/error.html"
   etag         = filemd5("s3_static_files/error.html")
   content_type = "text/html"
+}
+resource "aws_s3_object" "script_js" {
+  bucket       = aws_s3_bucket.my_files.id
+  key          = "script.js"
+  source       = "s3_static_files/script.js"
+  etag         = filemd5("s3_static_files/script.js")
+  content_type = "application/javascript"
 }

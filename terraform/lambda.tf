@@ -28,7 +28,10 @@ data "aws_iam_policy_document" "execution_policy_forLambda_logging_vpc" {
       "s3:ListBucket",
       "s3:GetObject",
       "s3:PutObject",
-      "s3:DeleteObject"
+      "s3:DeleteObject",
+      "dynamodb:GetItem",
+      "dynamodb:PutItem",
+      "dynamodb:UpdateItem"
     ]
 
     resources = ["*"]
@@ -42,7 +45,7 @@ resource "aws_iam_role_policy" "lambda_logging" {
 
 resource "aws_lambda_function" "glue_lambda" {
   filename         = "lambda.zip"
-  function_name    = "Glue_Lambda"
+  function_name    = "dynamoDB_Lambda"
   role             = aws_iam_role.lambda_execution_role.arn
   handler          = "index.lambda_handler"
   source_code_hash = filebase64sha256("lambda.zip")
@@ -55,4 +58,8 @@ resource "aws_lambda_function" "glue_lambda" {
 
     }
   }
+}
+resource "aws_lambda_function_url" "glue_lambda_url" {
+  function_name      = aws_lambda_function.glue_lambda.arn
+  authorization_type = "NONE" # public URL (good for S3 static site JS)
 }
